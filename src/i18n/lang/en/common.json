@@ -13,5 +13,8 @@
   "no_data": "No data available",
   "error_occurred": "An error occurred",
   "error_failed_to_load_board_state": "Failed to load board state",
-  "error_failed_to_save_board_state": "Failed to save board state"
+  "error_failed_to_save_board_state": "Failed to save board state",
+  "board_add_column": "Add column",
+  "board_column_title_placeholder": "Column title",
+  "board_empty": "No columns yet. Add one to get started."
 }

@@ -1,5 +1,6 @@
 import { FC, ReactElement, useMemo } from 'react';
 
+import BoardVM from '@pages/boardModule/vm/BoardVM/BoardVM';
 import { buildProvidersTree } from '@helpers/providerBuilder.helper';
 import { BoardStoreProvider } from '@providers/boardStoreProvider/BoardStoreProvider';
 
@@ -13,9 +14,7 @@ const BoardModule: FC = (): ReactElement => {
   return (
     <BoardProviders>
       <main>
-        <h1>
-          Board
-        </h1>
+        <BoardVM />
       </main>
     </BoardProviders>
   );

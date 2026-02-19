@@ -1,0 +1,48 @@
+import { FC, ReactElement, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { useBoardActions } from '@providers/boardStoreProvider/hooks/useBoardActions';
+import useBoardStoreProvider from '@providers/boardStoreProvider/useBoardStoreProvider';
+
+import AddColumnVM from '../AddColumnVM/AddColumnVM';
+import BoardColumnVM from '../BoardColumnVM/BoardColumnVM';
+
+import { getSortedColumnsAndIds } from './boardVM.helpers';
+import { emptyMessageStyle, rootStyle } from './boardVM.styles';
+
+const BoardVM: FC = (): ReactElement => {
+  const { boardStore } = useBoardStoreProvider();
+  const actions = useBoardActions();
+  const { t } = useTranslation();
+
+  const columnsFromStore = boardStore((state) => state.columnsSlice.columns);
+
+  const { columns, columnIds } = useMemo(
+    () => getSortedColumnsAndIds(columnsFromStore),
+    [columnsFromStore],
+  );
+
+  return (
+    <div style={rootStyle}>
+      {columns.map((column) => (
+        <BoardColumnVM
+          key={column.id}
+          column={column}
+          columnIds={columnIds}
+          onDelete={actions.removeColumn}
+          onReorder={actions.reorderColumns}
+        />
+      ))}
+
+      <AddColumnVM onAdd={actions.addColumn} />
+
+      {columns.length === 0 && (
+        <p style={emptyMessageStyle}>
+          {t('common:board_empty')}
+        </p>
+      )}
+    </div>
+  );
+};
+
+export default BoardVM;
