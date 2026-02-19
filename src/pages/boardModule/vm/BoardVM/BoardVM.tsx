@@ -6,7 +6,7 @@ import useBoardStoreProvider from '@providers/boardStoreProvider/useBoardStorePr
 import AddColumnVM from '../AddColumnVM/AddColumnVM';
 import BoardColumnVM from '../BoardColumnVM/BoardColumnVM';
 
-import { getSortedColumnsAndIds } from './boardVM.helpers';
+import { getSortedColumnsAndIds } from '@pages/boardModule/helpers/boardColumns.helper';
 import { emptyMessageStyle, rootStyle } from './boardVM.styles';
 
 const BoardVM: FC = (): ReactElement => {

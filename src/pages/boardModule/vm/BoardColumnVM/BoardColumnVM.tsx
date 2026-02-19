@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useBoardActions } from '@providers/boardStoreProvider/hooks/useBoardActions';
 import useBoardStoreProvider from '@providers/boardStoreProvider/useBoardStoreProvider';
 import { useColumnDragAndDrop } from '@pages/boardModule/hooks/useColumnDragAndDrop';
+import { useTaskDropTargetForColumn } from '@pages/boardModule/hooks/useTaskDropTargetForColumn';
 import Button from '@shared/UIkit/Button/Button';
 import Card from '@shared/UIkit/Card/Card';
 
@@ -27,6 +28,7 @@ const BoardColumnVM: FC<IBoardColumnVMProps> = (props) => {
   const { boardStore } = useBoardStoreProvider();
   const actions = useBoardActions();
   const columnRef = useRef<HTMLDivElement>(null);
+  const taskListRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
 
   const tasksFromStore = boardStore((state) => state.tasksSlice.tasks);
@@ -54,6 +56,19 @@ const BoardColumnVM: FC<IBoardColumnVMProps> = (props) => {
     columnIds,
     onReorder: actions.reorderColumns,
     setIsDragging,
+  });
+
+  const handleTaskDropOnColumn = useCallback(
+    (taskId: string) => {
+      actions.moveTaskToColumn(taskId, column.id);
+    },
+    [column.id, actions],
+  );
+
+  useTaskDropTargetForColumn({
+    elementRef: taskListRef,
+    columnId: column.id,
+    onTaskDrop: handleTaskDropOnColumn,
   });
 
   const cardStyle = useMemo(
@@ -85,7 +100,10 @@ const BoardColumnVM: FC<IBoardColumnVMProps> = (props) => {
           </Button>
         </div>
 
-        <div style={taskListStyle}>
+        <div
+          ref={taskListRef}
+          style={taskListStyle}
+        >
           {tasks.map((task) => (
             <TaskCardVM
               key={task.id}

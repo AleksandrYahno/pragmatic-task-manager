@@ -6,6 +6,7 @@ import Card from '@shared/UIkit/Card/Card';
 
 import DropdownMenuVM from '../DropdownMenuVM/DropdownMenuVM';
 import TaskCardEditInputVM from '../TaskCardEditInputVM/TaskCardEditInputVM';
+import TaskCheckboxVM from '../TaskCheckboxVM/TaskCheckboxVM';
 
 import { ITaskCardVMProps } from './taskCardVM.interface';
 import {
@@ -50,6 +51,8 @@ const TaskCardVM: FC<ITaskCardVMProps> = (props) => {
     >
       <Card style={taskCardWrapperStyle}>
         <div style={taskCardRowStyle}>
+          <TaskCheckboxVM taskId={task.id} />
+
           {isEditing ? (
             <TaskCardEditInputVM
               initialTitle={task.title}

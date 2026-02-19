@@ -20,5 +20,9 @@
   "board_task_title_placeholder": "Task title",
   "board_empty": "No columns yet. Add one to get started.",
   "board_mark_complete": "Mark as complete",
-  "board_mark_incomplete": "Mark as incomplete"
+  "board_mark_incomplete": "Mark as incomplete",
+  "board_selection_count": "{{count}} selected",
+  "board_clear_selection": "Clear selection",
+  "board_move_to_column": "Move to column",
+  "board_select_all_in_column": "Select all in column"
 }
