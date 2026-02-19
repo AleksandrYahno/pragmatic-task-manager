@@ -22,3 +22,10 @@ export const deleteButtonStyle: CSSProperties = {
   padding: '4px 8px',
   fontSize: 12,
 };
+
+export const taskListStyle: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 8,
+  marginTop: 8,
+};

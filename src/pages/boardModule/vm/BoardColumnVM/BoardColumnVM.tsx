@@ -5,11 +5,15 @@ import { useColumnDragAndDrop } from '@pages/boardModule/hooks/useColumnDragAndD
 import Button from '@shared/UIkit/Button/Button';
 import Card from '@shared/UIkit/Card/Card';
 
+import AddTaskVM from '../AddTaskVM/AddTaskVM';
+import TaskCardVM from '../TaskCardVM/TaskCardVM';
+
 import { IBoardColumnVMProps } from './boardColumnVM.interface';
 import {
   deleteButtonStyle,
   getCardStyle,
   headerStyle,
+  taskListStyle,
   titleStyle,
 } from './boardColumnVM.styles';
 
@@ -17,7 +21,10 @@ const BoardColumnVM = memo<IBoardColumnVMProps>((props) => {
   const {
     column,
     columnIds,
-    onDelete,
+    tasks,
+    onAddTask,
+    onDeleteColumn,
+    onDeleteTask,
     onReorder,
   } = props;
   const { t } = useTranslation();
@@ -37,8 +44,8 @@ const BoardColumnVM = memo<IBoardColumnVMProps>((props) => {
     [isDragging],
   );
 
-  const handleDelete = (): void => {
-    onDelete(column.id);
+  const handleDeleteColumn = (): void => {
+    onDeleteColumn(column.id);
   };
 
   return (
@@ -53,13 +60,28 @@ const BoardColumnVM = memo<IBoardColumnVMProps>((props) => {
           </span>
 
           <Button
-            onClick={handleDelete}
+            onClick={handleDeleteColumn}
             variant="secondary"
             style={deleteButtonStyle}
           >
             {t('common:delete')}
           </Button>
         </div>
+
+        <div style={taskListStyle}>
+          {tasks.map((task) => (
+            <TaskCardVM
+              key={task.id}
+              task={task}
+              onDelete={onDeleteTask}
+            />
+          ))}
+        </div>
+
+        <AddTaskVM
+          columnId={column.id}
+          onAddTask={onAddTask}
+        />
       </Card>
     </div>
   );

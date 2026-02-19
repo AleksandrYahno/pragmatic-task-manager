@@ -7,7 +7,7 @@ import useBoardStoreProvider from '@providers/boardStoreProvider/useBoardStorePr
 import AddColumnVM from '../AddColumnVM/AddColumnVM';
 import BoardColumnVM from '../BoardColumnVM/BoardColumnVM';
 
-import { getSortedColumnsAndIds } from './boardVM.helpers';
+import { getSortedColumnsAndIds, getTasksByColumnId } from './boardVM.helpers';
 import { emptyMessageStyle, rootStyle } from './boardVM.styles';
 
 const BoardVM: FC = (): ReactElement => {
@@ -16,10 +16,16 @@ const BoardVM: FC = (): ReactElement => {
   const { t } = useTranslation();
 
   const columnsFromStore = boardStore((state) => state.columnsSlice.columns);
+  const tasksFromStore = boardStore((state) => state.tasksSlice.tasks);
 
   const { columns, columnIds } = useMemo(
     () => getSortedColumnsAndIds(columnsFromStore),
     [columnsFromStore],
+  );
+
+  const tasksByColumnId = useMemo(
+    () => getTasksByColumnId(tasksFromStore),
+    [tasksFromStore],
   );
 
   return (
@@ -29,7 +35,10 @@ const BoardVM: FC = (): ReactElement => {
           key={column.id}
           column={column}
           columnIds={columnIds}
-          onDelete={actions.removeColumn}
+          tasks={tasksByColumnId[column.id] ?? []}
+          onAddTask={actions.addTask}
+          onDeleteColumn={actions.removeColumn}
+          onDeleteTask={actions.removeTask}
           onReorder={actions.reorderColumns}
         />
       ))}
