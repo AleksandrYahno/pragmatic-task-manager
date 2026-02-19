@@ -12,10 +12,16 @@ dist
 dist-ssr
 *.local
 
+# TypeScript build info
+*.tsbuildinfo
+tsconfig.app.tsbuildinfo
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+.cursor
 .cursor-context
+.cursor/
 .idea
 .DS_Store
 *.suo
