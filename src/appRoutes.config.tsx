@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router';
 
 import LazyPageBoundary from '@components/lazyPageBoundary/LazyPageBoundary';
 
-const BoardModule = lazy(() => import('@pages/boardModule/BoardModule'));
+const BoardModule = lazy(() => import('./pages/boardModule/BoardModule'));
 
 export const appRouter = createBrowserRouter([
   {

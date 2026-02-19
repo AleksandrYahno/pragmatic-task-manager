@@ -14,4 +14,5 @@ export interface IBoardActions {
   toggleTaskSelection: (taskId: string) => void;
   selectAllInColumn: (columnId: string) => void;
   clearSelection: () => void;
+  setEditingTaskId: (taskId: string | null) => void;
 }

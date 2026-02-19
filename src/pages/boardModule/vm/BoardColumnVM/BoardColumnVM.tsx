@@ -1,9 +1,13 @@
-import { memo, useMemo, useRef, useState } from 'react';
+import { FC, useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useBoardActions } from '@providers/boardStoreProvider/hooks/useBoardActions';
+import useBoardStoreProvider from '@providers/boardStoreProvider/useBoardStoreProvider';
 import { useColumnDragAndDrop } from '@pages/boardModule/hooks/useColumnDragAndDrop';
 import Button from '@shared/UIkit/Button/Button';
 import Card from '@shared/UIkit/Card/Card';
+
+import { getTasksByColumnId } from '@pages/boardModule/hooks/tasksByColumnId.helper';
 
 import AddTaskVM from '../AddTaskVM/AddTaskVM';
 import TaskCardVM from '../TaskCardVM/TaskCardVM';
@@ -17,25 +21,38 @@ import {
   titleStyle,
 } from './boardColumnVM.styles';
 
-const BoardColumnVM = memo<IBoardColumnVMProps>((props) => {
-  const {
-    column,
-    columnIds,
-    tasks,
-    onAddTask,
-    onDeleteColumn,
-    onDeleteTask,
-    onReorder,
-  } = props;
+const BoardColumnVM: FC<IBoardColumnVMProps> = (props) => {
+  const { column, columnIds } = props;
   const { t } = useTranslation();
+  const { boardStore } = useBoardStoreProvider();
+  const actions = useBoardActions();
   const columnRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+
+  const tasksFromStore = boardStore((state) => state.tasksSlice.tasks);
+
+  const tasks = useMemo(
+    () => (getTasksByColumnId(tasksFromStore)[column.id] ?? []),
+    [tasksFromStore, column.id],
+  );
+
+  const taskIdsInColumn = useMemo(
+    () => tasks.map((task) => task.id),
+    [tasks],
+  );
+
+  const handleReorderTasks = useCallback(
+    (taskIds: string[]) => {
+      actions.reorderTasksInColumn(column.id, taskIds);
+    },
+    [column.id, actions],
+  );
 
   useColumnDragAndDrop({
     elementRef: columnRef,
     columnId: column.id,
     columnIds,
-    onReorder,
+    onReorder: actions.reorderColumns,
     setIsDragging,
   });
 
@@ -45,7 +62,7 @@ const BoardColumnVM = memo<IBoardColumnVMProps>((props) => {
   );
 
   const handleDeleteColumn = (): void => {
-    onDeleteColumn(column.id);
+    actions.removeColumn(column.id);
   };
 
   return (
@@ -73,20 +90,16 @@ const BoardColumnVM = memo<IBoardColumnVMProps>((props) => {
             <TaskCardVM
               key={task.id}
               task={task}
-              onDelete={onDeleteTask}
+              taskIdsInColumn={taskIdsInColumn}
+              onReorder={handleReorderTasks}
             />
           ))}
         </div>
 
-        <AddTaskVM
-          columnId={column.id}
-          onAddTask={onAddTask}
-        />
+        <AddTaskVM columnId={column.id} />
       </Card>
     </div>
   );
-});
-
-BoardColumnVM.displayName = 'BoardColumnVM';
+};
 
 export default BoardColumnVM;

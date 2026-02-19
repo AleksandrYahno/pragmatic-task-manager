@@ -15,7 +15,7 @@ const Button: FC<IButtonProps> = (props) => {
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={onClick ?? undefined}
       disabled={disabled}
       style={{
         ...getButtonStyle(disabled, variant),

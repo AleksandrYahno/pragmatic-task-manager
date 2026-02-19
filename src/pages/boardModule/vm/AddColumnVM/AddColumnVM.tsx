@@ -2,22 +2,23 @@ import { KeyboardEvent } from 'react';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useBoardActions } from '@providers/boardStoreProvider/hooks/useBoardActions';
 import Button from '@shared/UIkit/Button/Button';
 import Card from '@shared/UIkit/Card/Card';
 import Input from '@shared/UIkit/Input/Input';
 
 import { IAddColumnVMProps } from './addColumnVM.interface';
 
-const AddColumnVM: FC<IAddColumnVMProps> = (props) => {
-  const { onAdd } = props;
+const AddColumnVM: FC<IAddColumnVMProps> = () => {
   const { t } = useTranslation();
+  const actions = useBoardActions();
   const [title, setTitle] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmit = (): void => {
     const trimmed = title.trim();
     if (!trimmed) return;
-    onAdd(trimmed);
+    actions.addColumn(trimmed);
     setTitle('');
   };
 

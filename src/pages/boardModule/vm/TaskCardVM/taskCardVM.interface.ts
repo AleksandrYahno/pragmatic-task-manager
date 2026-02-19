@@ -2,5 +2,6 @@ import { IBoardTask } from '@providers/boardStoreProvider/boardStore/tasksSlice/
 
 export interface ITaskCardVMProps {
   task: IBoardTask;
-  onDelete: (taskId: string) => void;
+  taskIdsInColumn: string[];
+  onReorder: (taskIds: string[]) => void;
 }

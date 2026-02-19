@@ -1,1 +1,24 @@
-{"app_title":"Pragmatic Task Manager","search":"Search","close":"Close","save":"Save","cancel":"Cancel","delete":"Delete","edit":"Edit","confirm":"Confirm","back":"Back","next":"Next","loading":"Loading...","no_data":"No data available","error_occurred":"An error occurred","error_failed_to_load_board_state":"Failed to load board state","error_failed_to_save_board_state":"Failed to save board state","board_add_column":"Add column","board_column_title_placeholder":"Column title","board_add_task":"Add task","board_task_title_placeholder":"Task title","board_empty":"No columns yet. Add one to get started."}
+{
+  "app_title": "Pragmatic Task Manager",
+  "search": "Search",
+  "close": "Close",
+  "save": "Save",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "edit": "Edit",
+  "confirm": "Confirm",
+  "back": "Back",
+  "next": "Next",
+  "loading": "Loading...",
+  "no_data": "No data available",
+  "error_occurred": "An error occurred",
+  "error_failed_to_load_board_state": "Failed to load board state",
+  "error_failed_to_save_board_state": "Failed to save board state",
+  "board_add_column": "Add column",
+  "board_column_title_placeholder": "Column title",
+  "board_add_task": "Add task",
+  "board_task_title_placeholder": "Task title",
+  "board_empty": "No columns yet. Add one to get started.",
+  "board_mark_complete": "Mark as complete",
+  "board_mark_incomplete": "Mark as incomplete"
+}

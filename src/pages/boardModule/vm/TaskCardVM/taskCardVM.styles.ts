@@ -34,7 +34,7 @@ export const taskCardRowStyle: CSSProperties = {
   gap: 8,
 };
 
-export const taskCardDeleteButtonStyle: CSSProperties = {
-  padding: '4px 8px',
-  fontSize: 12,
-};
+export const getTaskCardDragWrapperStyle = (isDragging: boolean): CSSProperties => ({
+  opacity: isDragging ? 0.8 : 1,
+  backgroundColor: isDragging ? '#e8f4fc' : undefined,
+});

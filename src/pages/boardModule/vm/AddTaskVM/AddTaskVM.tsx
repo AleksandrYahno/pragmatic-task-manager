@@ -2,6 +2,7 @@ import { KeyboardEvent } from 'react';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useBoardActions } from '@providers/boardStoreProvider/hooks/useBoardActions';
 import Button from '@shared/UIkit/Button/Button';
 import Card from '@shared/UIkit/Card/Card';
 import Input from '@shared/UIkit/Input/Input';
@@ -10,15 +11,16 @@ import { IAddTaskVMProps } from './addTaskVM.interface';
 import { addTaskWrapperStyle } from './addTaskVM.styles';
 
 const AddTaskVM: FC<IAddTaskVMProps> = (props) => {
-  const { columnId, onAddTask } = props;
+  const { columnId } = props;
   const { t } = useTranslation();
+  const actions = useBoardActions();
   const [title, setTitle] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmit = (): void => {
     const trimmed = title.trim();
     if (!trimmed) return;
-    onAddTask(columnId, trimmed);
+    actions.addTask(columnId, trimmed);
     setTitle('');
   };
 

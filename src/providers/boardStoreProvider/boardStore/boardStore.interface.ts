@@ -1,11 +1,13 @@
 import { ISerializedBoardState } from '@helpers/boardPersistence/serializedBoardState.interface';
 
+import { IBoardUISlice } from './boardUISlice/boardUISlice.interface';
 import { IColumnsSlice } from './columnsSlice/columnsSlice.interface';
 import { ITasksSlice } from './tasksSlice/tasksSlice.interface';
 import { ISelectionSlice } from './selectionSlice/selectionSlice.interface';
 import { ISearchFilterSlice } from './searchFilterSlice/searchFilterSlice.interface';
 
 export interface IBoardStore {
+  boardUISlice: IBoardUISlice;
   columnsSlice: IColumnsSlice;
   tasksSlice: ITasksSlice;
   selectionSlice: ISelectionSlice;

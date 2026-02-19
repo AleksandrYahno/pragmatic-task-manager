@@ -1,3 +1,2 @@
-export interface IAddColumnVMProps {
-  onAdd: (title: string) => void;
-}
+/** AddColumnVM has no props; it uses useBoardActions().addColumn directly. */
+export type IAddColumnVMProps = Record<string, never>;

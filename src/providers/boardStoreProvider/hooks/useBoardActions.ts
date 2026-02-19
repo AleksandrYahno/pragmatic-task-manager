@@ -32,6 +32,8 @@ export const useBoardActions = (): IBoardActions => {
       selectAllInColumn: (columnId: string) =>
         getStore().selectionSlice.selectAllInColumn(columnId),
       clearSelection: () => getStore().selectionSlice.clear(),
+      setEditingTaskId: (taskId) =>
+        getStore().boardUISlice.setEditingTaskId(taskId),
     };
   }, [boardStore]);
 };
