@@ -1,3 +1,5 @@
+import { ISerializedBoardState } from '@helpers/boardPersistence/serializedBoardState.interface';
+
 import { IColumnsSlice } from './columnsSlice/columnsSlice.interface';
 import { ITasksSlice } from './tasksSlice/tasksSlice.interface';
 import { ISelectionSlice } from './selectionSlice/selectionSlice.interface';
@@ -8,6 +10,7 @@ export interface IBoardStore {
   tasksSlice: ITasksSlice;
   selectionSlice: ISelectionSlice;
   searchFilterSlice: ISearchFilterSlice;
+  hydrateBoard: (payload: ISerializedBoardState | null) => void;
 }
 
 export type ImmerBoardStoreSetter = (fn: (store: IBoardStore) => void) => void;

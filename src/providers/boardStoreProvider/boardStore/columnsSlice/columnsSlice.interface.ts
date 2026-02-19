@@ -7,4 +7,7 @@ export interface IBoardColumn {
 export interface IColumnsSlice {
   columns: IBoardColumn[];
   setColumns: (columns: IBoardColumn[]) => void;
+  addColumn: (title: string) => void;
+  removeColumn: (columnId: string) => void;
+  reorderColumns: (columnIds: string[]) => void;
 }

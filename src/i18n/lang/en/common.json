@@ -11,5 +11,7 @@
   "next": "Next",
   "loading": "Loading...",
   "no_data": "No data available",
-  "error_occurred": "An error occurred"
+  "error_occurred": "An error occurred",
+  "error_failed_to_load_board_state": "Failed to load board state",
+  "error_failed_to_save_board_state": "Failed to save board state"
 }

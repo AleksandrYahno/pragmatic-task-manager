@@ -14,6 +14,13 @@ const boardStore = (set: ImmerBoardStoreSetter): IBoardStore => ({
   tasksSlice: tasksSlice(set),
   selectionSlice: selectionSlice(set),
   searchFilterSlice: searchFilterSlice(set),
+
+  hydrateBoard: (payload) => {
+    set((state) => {
+      state.columnsSlice.columns = payload?.columns ?? [];
+      state.tasksSlice.tasks = payload?.tasks ?? [];
+    });
+  },
 });
 
 const baseStore = immer(boardStore);

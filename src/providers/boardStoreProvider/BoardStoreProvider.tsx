@@ -1,6 +1,7 @@
 import { createContext, FC, PropsWithChildren, useMemo, useRef } from 'react';
 import { create, StoreApi, UseBoundStore } from 'zustand';
 
+import BoardPersistenceOrchestrator from './BoardPersistenceOrchestrator';
 import { IBoardStoreContext } from './boardStoreContext.interface';
 import { boardStoreInitializer } from './boardStore/boardStore';
 import { IBoardStore } from './boardStore/boardStore.interface';
@@ -21,7 +22,11 @@ const BoardStoreProvider: FC<PropsWithChildren> = (props) => {
 
   return (
     <BoardStoreContext.Provider value={values}>
-      {children}
+      <>
+        <BoardPersistenceOrchestrator />
+
+        {children}
+      </>
     </BoardStoreContext.Provider>
   );
 };
