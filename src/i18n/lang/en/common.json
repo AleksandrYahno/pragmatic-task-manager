@@ -24,5 +24,9 @@
   "board_selection_count": "{{count}} selected",
   "board_clear_selection": "Clear selection",
   "board_move_to_column": "Move to column",
-  "board_select_all_in_column": "Select all in column"
+  "board_select_all_in_column": "Select all in column",
+  "board_filter_all": "All",
+  "board_filter_completed": "Completed",
+  "board_filter_incomplete": "Incomplete",
+  "board_filter_label": "Filter:"
 }

@@ -8,6 +8,7 @@ import { useTaskDropTargetForColumn } from '@pages/boardModule/hooks/useTaskDrop
 import Button from '@shared/UIkit/Button/Button';
 import Card from '@shared/UIkit/Card/Card';
 
+import { filterTasksBySearchAndCompletion } from '@pages/boardModule/helpers/filterTasks.helper';
 import { getTasksByColumnId } from '@pages/boardModule/hooks/tasksByColumnId.helper';
 
 import AddTaskVM from '../AddTaskVM/AddTaskVM';
@@ -32,15 +33,31 @@ const BoardColumnVM: FC<IBoardColumnVMProps> = (props) => {
   const [isDragging, setIsDragging] = useState(false);
 
   const tasksFromStore = boardStore((state) => state.tasksSlice.tasks);
+  const searchQuery = boardStore(
+    (state) => state.searchFilterSlice.searchQuery,
+  );
+  const completionFilter = boardStore(
+    (state) => state.searchFilterSlice.completionFilter,
+  );
 
-  const tasks = useMemo(
-    () => (getTasksByColumnId(tasksFromStore)[column.id] ?? []),
+  const tasksInColumn = useMemo(
+    () => getTasksByColumnId(tasksFromStore)[column.id] ?? [],
     [tasksFromStore, column.id],
   );
 
+  const tasks = useMemo(
+    () =>
+      filterTasksBySearchAndCompletion(
+        tasksInColumn,
+        searchQuery,
+        completionFilter,
+      ),
+    [tasksInColumn, searchQuery, completionFilter],
+  );
+
   const taskIdsInColumn = useMemo(
-    () => tasks.map((task) => task.id),
-    [tasks],
+    () => tasksInColumn.map((task) => task.id),
+    [tasksInColumn],
   );
 
   const handleReorderTasks = useCallback(

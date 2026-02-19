@@ -2,6 +2,8 @@ import { FC, ReactElement, useMemo } from 'react';
 
 import Header from '@components/header/Header';
 import BoardVM from '@pages/boardModule/vm/BoardVM/BoardVM';
+import FilterBarVM from '@pages/boardModule/vm/FilterBarVM/FilterBarVM';
+import SearchBarVM from '@pages/boardModule/vm/SearchBarVM/SearchBarVM';
 import SelectionBarVM from '@pages/boardModule/vm/SelectionBarVM/SelectionBarVM';
 import { buildProvidersTree } from '@helpers/providerBuilder.helper';
 import { BoardStoreProvider } from '@providers/boardStoreProvider/BoardStoreProvider';
@@ -17,6 +19,10 @@ const BoardModule: FC = (): ReactElement => {
     <BoardProviders>
       <main>
         <Header />
+
+        <SearchBarVM />
+
+        <FilterBarVM />
 
         <SelectionBarVM />
 

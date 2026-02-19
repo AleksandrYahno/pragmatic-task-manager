@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo } from 'react';
+import { ChangeEvent, FC, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useBoardActions } from '@providers/boardStoreProvider/hooks/useBoardActions';
@@ -50,7 +50,7 @@ const SelectionBarVM: FC = () => {
   }, [selectedTaskIds, actions]);
 
   const handleMoveToColumn = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    (event: ChangeEvent<HTMLSelectElement>): void => {
       const targetColumnId = event.target.value;
       if (!targetColumnId) return;
       selectedTaskIds.forEach((taskId) =>
@@ -67,7 +67,7 @@ const SelectionBarVM: FC = () => {
   }, [actions]);
 
   const handleSelectAllInColumn = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    (event: ChangeEvent<HTMLSelectElement>): void => {
       const columnId = event.target.value;
       if (!columnId) return;
       actions.selectAllInColumn(columnId);

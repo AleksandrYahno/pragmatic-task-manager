@@ -32,6 +32,10 @@ export const useBoardActions = (): IBoardActions => {
       selectAllInColumn: (columnId: string) =>
         getStore().selectionSlice.selectAllInColumn(columnId),
       clearSelection: () => getStore().selectionSlice.clear(),
+      setSearchQuery: (query: string) =>
+        getStore().searchFilterSlice.setSearchQuery(query),
+      setCompletionFilter: (filter) =>
+        getStore().searchFilterSlice.setCompletionFilter(filter),
       setEditingTaskId: (taskId) =>
         getStore().boardUISlice.setEditingTaskId(taskId),
     };

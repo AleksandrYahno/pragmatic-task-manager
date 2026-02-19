@@ -1,3 +1,5 @@
+import { CompletionFilter } from '@providers/boardStoreProvider/boardStore/searchFilterSlice/searchFilterSlice.interface';
+
 export interface IBoardActions {
   addColumn: (title: string) => void;
   removeColumn: (columnId: string) => void;
@@ -14,5 +16,7 @@ export interface IBoardActions {
   toggleTaskSelection: (taskId: string) => void;
   selectAllInColumn: (columnId: string) => void;
   clearSelection: () => void;
+  setSearchQuery: (query: string) => void;
+  setCompletionFilter: (filter: CompletionFilter) => void;
   setEditingTaskId: (taskId: string | null) => void;
 }
