@@ -7,11 +7,16 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@store/*": ["src/store/*"],
       "@shared/*": ["src/shared/*"],
       "@modules/*": ["src/modules/*"],
       "@helpers/*": ["src/helpers/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@providers/*": ["src/providers/*"],
+      "@pages/*": ["src/pages/*"],
+      "@theme/*": ["src/theme/*"],
+      "@i18n/*": ["src/i18n/*"]
     },
 
     /* Bundler mode */

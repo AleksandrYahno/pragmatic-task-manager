@@ -1,43 +1,31 @@
-import { FC } from 'react';
+import { FC, ReactElement, useMemo } from 'react';
+import { SnackbarProvider } from 'notistack';
 
-import { useAppStore } from '@store/useAppStore';
+import { buildProvidersTree } from '@helpers/providerBuilder.helper';
+import { AppMainProvider } from '@providers/appMainProvider/AppMainProvider';
+import { ThemeProvider } from '@providers/themeProvider/ThemeProvider';
 
-import { IAppProps } from './App.interface';
-import './App.css';
+const snackbarProviderConfig = {
+  maxSnack: 3,
+  anchorOrigin: {
+    vertical: 'bottom' as const,
+    horizontal: 'right' as const,
+  },
+};
 
-const App: FC<IAppProps> = () => {
-  const { count, increment, reset } = useAppStore();
+const App: FC = (): ReactElement => {
+  const GlobalProviders = useMemo(() => {
+    return buildProvidersTree([
+      [ThemeProvider],
+      [SnackbarProvider, { ...snackbarProviderConfig }],
+      [AppMainProvider],
+    ]);
+  }, []);
 
   return (
-    <main className="app">
-      <h1>
-        Pragmatic Task Manager
-      </h1>
-      <p>
-        React 19 + Vite 7 + TypeScript + Zustand
-      </p>
-      <div className="card">
-        <span>
-          count:
-          {' '}
-          {count}
-        </span>
-        <div className="actions">
-          <button
-            type="button"
-            onClick={increment}
-          >
-            +1
-          </button>
-          <button
-            type="button"
-            onClick={reset}
-          >
-            reset
-          </button>
-        </div>
-      </div>
-    </main>
+    <GlobalProviders>
+      show this message if something went wrong with react router inside AppMainProvider
+    </GlobalProviders>
   );
 };
 

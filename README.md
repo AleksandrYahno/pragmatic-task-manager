@@ -1,6 +1,6 @@
 # Pragmatic Task Manager
 
-A minimal starter template: **React 19**, **Vite 7**, **TypeScript**, and **Zustand**.
+A minimal starter template: **React 19**, **Vite 7**, **TypeScript**, and **Zustand**. Custom UI (no component libraries); theme and routing set up.
 
 ---
 
@@ -12,6 +12,8 @@ A minimal starter template: **React 19**, **Vite 7**, **TypeScript**, and **Zust
 | Build        | Vite 7    |
 | Language     | TypeScript 5.9 |
 | State        | Zustand   |
+| Routing      | React Router 7 |
+| Drag & drop  | @atlaskit/pragmatic-drag-and-drop (installed; usage later) |
 
 ---
 
@@ -47,18 +49,29 @@ App runs at **http://localhost:5173**.
 
 ```
 src/
-├── store/           # Zustand stores (e.g. useAppStore.ts)
+├── providers/       # ThemeProvider, AppMainProvider (context + router)
+├── pages/           # Route-level pages (e.g. boardPage)
+├── theme/           # appPalette, applyTheme → CSS vars (--app-*)
+├── components/      # BackdropLoading, LazyPageBoundary
+├── helpers/         # buildProvidersTree
+├── store/           # Zustand store(s)
+├── appRoutes.config.tsx
 ├── App.tsx
-├── App.interface.ts
-├── App.css
 ├── main.tsx
 └── index.css
 ```
 
 ---
 
+## Theme
+
+Colors are defined in `src/theme/appPalette.ts` and applied to `document.documentElement` as CSS custom properties (`--app-overlay`, `--app-background-neutral`, etc.) by **ThemeProvider** on mount. Use `var(--app-*)` in CSS. No MUI; palette aligned with Atlassian-style tokens.
+
+---
+
 ## Code style
 
-- **ESLint** and **TypeScript** are aligned with strict, type-checked rules.
-- Components use `FC<IProps>`; interfaces live in separate `*.interface.ts` files.
-- Path aliases: `@store/*`, `@shared/*`, `@modules/*`, `@helpers/*`, `@components/*`.
+- **ESLint** and **TypeScript** strict, type-checked.
+- Components: `FC<IProps>`; interfaces in separate `*.interface.ts` files; names start with `I`.
+- Path aliases: `@store/*`, `@shared/*`, `@modules/*`, `@helpers/*`, `@components/*`, `@providers/*`, `@pages/*`, `@theme/*`.
+- Providers: named export (`export { ThemeProvider }`); App composes them via `buildProvidersTree([...])`.

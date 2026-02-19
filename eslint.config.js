@@ -50,6 +50,8 @@ export default tseslint.config(
           additionalHooks: '(useEffect)',
         },
       ],
+      'react-hooks/static-components': OFF,
+      'react-hooks/refs': OFF,
       // indents
       'indent': ['warn', 2, { SwitchCase: 1 }],
       'no-tabs': ['warn'],
