@@ -2,6 +2,8 @@
 
 Responsive **kanban-style todo** — React 19, Vite 7, TypeScript, Zustand. Custom UI; DnD via **@atlaskit/pragmatic-drag-and-drop**.
 
+**Live demo:** [https://69982fa7511b23b08d40c5db--luxury-blancmange-cdd889.netlify.app/](https://69982fa7511b23b08d40c5db--luxury-blancmange-cdd889.netlify.app/)
+
 ---
 
 ## Features
