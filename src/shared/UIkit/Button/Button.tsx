@@ -10,13 +10,18 @@ const Button: FC<IButtonProps> = (props) => {
     disabled = false,
     variant = 'primary',
     style = {},
+    ariaLabel,
   } = props;
+
+  const className = `ui-button ui-button--${variant}`;
 
   return (
     <button
       type="button"
+      className={className}
       onClick={onClick ?? undefined}
       disabled={disabled}
+      aria-label={ariaLabel}
       style={{
         ...getButtonStyle(disabled, variant),
         ...style,

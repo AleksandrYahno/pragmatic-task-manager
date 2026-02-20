@@ -14,13 +14,13 @@ export const dropdownMenuPanelStyle: CSSProperties = {
   position: 'absolute',
   top: '100%',
   right: 0,
-  marginTop: 4,
+  marginTop: 6,
   minWidth: 160,
-  padding: 4,
-  backgroundColor: '#fff',
-  border: '1px solid #e0e0e0',
-  borderRadius: 6,
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+  padding: 6,
+  backgroundColor: 'var(--app-background-neutral, #fff)',
+  border: '1px solid var(--app-border-neutral, rgba(0,0,0,0.08))',
+  borderRadius: 'var(--app-radius-md, 10px)',
+  boxShadow: 'var(--app-shadow-md, 0 4px 12px rgba(0,0,0,0.06))',
   zIndex: 1000,
   listStyle: 'none',
   margin: 0,
@@ -29,18 +29,18 @@ export const dropdownMenuPanelStyle: CSSProperties = {
 export const dropdownMenuItemStyle: CSSProperties = {
   display: 'block',
   width: '100%',
-  padding: '8px 12px',
+  padding: '10px 12px',
   border: 'none',
-  borderRadius: 4,
+  borderRadius: 'var(--app-radius-sm, 8px)',
   backgroundColor: 'transparent',
   fontSize: 14,
   textAlign: 'left',
   cursor: 'pointer',
-  color: '#333',
+  color: 'var(--app-text-neutral, #1d1d1f)',
 };
 
 export const dropdownMenuItemHoverStyle: CSSProperties = {
-  backgroundColor: '#f5f5f5',
+  backgroundColor: 'var(--app-background-tertiary, #f5f5f7)',
 };
 
 export const getDropdownMenuItemStyle = (hovered: boolean): CSSProperties => ({

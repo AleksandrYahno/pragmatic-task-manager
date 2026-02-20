@@ -44,6 +44,7 @@ const FilterBarVM: FC = () => {
       <span style={filterBarLabelStyle}>
         {t('common:board_filter_label')}
       </span>
+
       {FILTER_OPTIONS.map((filter) => (
         <button
           key={filter}

@@ -1,6 +1,7 @@
 import { FC, useMemo, useRef, useState } from 'react';
 
 import useBoardStoreProvider from '@providers/boardStoreProvider/useBoardStoreProvider';
+import { getHighlightedTitleSegments } from '@pages/boardModule/helpers/highlightSearch.helper';
 import { useTaskDragAndDrop } from '@pages/boardModule/hooks/useTaskDragAndDrop';
 import Card from '@shared/UIkit/Card/Card';
 
@@ -13,6 +14,7 @@ import {
   getTaskCardDragWrapperStyle,
   getTaskTitleStyle,
   taskCardRowStyle,
+  taskTitleHighlightStyle,
   taskCardWrapperStyle,
 } from './taskCardVM.styles';
 
@@ -32,7 +34,15 @@ const TaskCardVM: FC<ITaskCardVMProps> = (props) => {
   });
 
   const editingTaskId = boardStore((state) => state.boardUISlice.editingTaskId);
+  const searchQuery = boardStore(
+    (state) => state.searchFilterSlice.searchQuery,
+  );
   const isEditing = editingTaskId === task.id;
+
+  const titleSegments = useMemo(
+    () => getHighlightedTitleSegments(task.title, searchQuery),
+    [task.title, searchQuery],
+  );
 
   const titleStyle = useMemo(
     () => getTaskTitleStyle(task.completed),
@@ -60,7 +70,18 @@ const TaskCardVM: FC<ITaskCardVMProps> = (props) => {
             />
           ) : (
             <span style={titleStyle}>
-              {task.title}
+              {titleSegments.map((segment, index) =>
+                segment.match ? (
+                  <span
+                    key={index}
+                    style={taskTitleHighlightStyle}
+                  >
+                    {segment.text}
+                  </span>
+                ) : (
+                  segment.text
+                ),
+              )}
             </span>
           )}
 

@@ -14,6 +14,8 @@
   "error_occurred": "An error occurred",
   "error_failed_to_load_board_state": "Failed to load board state",
   "error_failed_to_save_board_state": "Failed to save board state",
+  "error_something_went_wrong": "Something went wrong",
+  "error_reload": "Reload",
   "board_add_column": "Add column",
   "board_column_title_placeholder": "Column title",
   "board_add_task": "Add task",
@@ -28,5 +30,10 @@
   "board_filter_all": "All",
   "board_filter_completed": "Completed",
   "board_filter_incomplete": "Incomplete",
-  "board_filter_label": "Filter:"
+  "board_filter_label": "Filter:",
+  "board_add_task_input_aria": "New task title",
+  "board_add_column_input_aria": "New column title",
+  "board_column_aria": "Column {{title}}",
+  "board_delete_column_aria": "Delete column {{title}}",
+  "board_task_menu_aria": "Task actions"
 }

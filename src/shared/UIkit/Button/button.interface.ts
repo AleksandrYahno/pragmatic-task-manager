@@ -6,4 +6,5 @@ export interface IButtonProps {
   disabled?: boolean;
   variant?: 'primary' | 'secondary';
   style?: CSSProperties;
+  ariaLabel?: string;
 }

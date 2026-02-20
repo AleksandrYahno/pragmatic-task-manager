@@ -7,7 +7,11 @@ import AddColumnVM from '../AddColumnVM/AddColumnVM';
 import BoardColumnVM from '../BoardColumnVM/BoardColumnVM';
 
 import { getSortedColumnsAndIds } from '@pages/boardModule/helpers/boardColumns.helper';
-import { emptyMessageStyle, rootStyle } from './boardVM.styles';
+import {
+  addColumnWrapperStyle,
+  emptyMessageStyle,
+  rootStyle,
+} from './boardVM.styles';
 
 const BoardVM: FC = (): ReactElement => {
   const { boardStore } = useBoardStoreProvider();
@@ -30,7 +34,9 @@ const BoardVM: FC = (): ReactElement => {
         />
       ))}
 
-      <AddColumnVM />
+      <div style={addColumnWrapperStyle}>
+        <AddColumnVM />
+      </div>
 
       {columns.length === 0 && (
         <p style={emptyMessageStyle}>

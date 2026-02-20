@@ -49,6 +49,8 @@ const AddColumnVM: FC<IAddColumnVMProps> = () => {
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        ariaLabel={t('common:board_add_column_input_aria')}
+        maxLength={500}
       />
 
       <Button

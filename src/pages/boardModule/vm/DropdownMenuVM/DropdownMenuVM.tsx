@@ -69,6 +69,7 @@ const DropdownMenuVM: FC<IDropdownMenuVMProps> = (props) => {
     <DropdownMenu
       trigger={defaultTrigger}
       items={menuItems}
+      ariaLabel={t('common:board_task_menu_aria')}
     />
   );
 };

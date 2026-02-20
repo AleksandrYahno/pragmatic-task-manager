@@ -12,6 +12,8 @@ const Input: FC<IInputProps> = (props) => {
     onFocus,
     onBlur,
     style = {},
+    ariaLabel,
+    maxLength,
   } = props;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -27,6 +29,8 @@ const Input: FC<IInputProps> = (props) => {
       onFocus={onFocus}
       onBlur={onBlur}
       placeholder={placeholder}
+      aria-label={ariaLabel}
+      maxLength={maxLength}
       style={{
         ...inputStyle,
         ...style,

@@ -79,7 +79,8 @@ export const tasksSlice = (set: ImmerBoardStoreSetter): ITasksSlice => ({
       const task = getItemById(state.tasksSlice.tasks, taskId, 'id');
       if (!task) return;
       const inTargetColumn = state.tasksSlice.tasks.filter(
-        (task) => task.columnId === targetColumnId,
+        (taskInTargetColumn) =>
+          taskInTargetColumn.columnId === targetColumnId,
       );
       task.columnId = targetColumnId;
       task.order = getNextOrderValue(inTargetColumn);

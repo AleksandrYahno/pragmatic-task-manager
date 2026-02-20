@@ -1,6 +1,7 @@
 import { createContext, FC, PropsWithChildren } from 'react';
 import { RouterProvider } from 'react-router';
 
+import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
 import { IAppMainActions } from '@providers/appMainProvider/appMainActions.interface';
 import { appRouter } from '@/appRoutes.config';
 
@@ -11,9 +12,11 @@ export let appMainActions: IAppMainActions;
 const AppMainProvider: FC<PropsWithChildren> = () => {
   return (
     <AppMainContext.Provider value={undefined}>
-      <RouterProvider
-        router={appRouter}
-      />
+      <ErrorBoundary>
+        <RouterProvider
+          router={appRouter}
+        />
+      </ErrorBoundary>
     </AppMainContext.Provider>
   );
 };

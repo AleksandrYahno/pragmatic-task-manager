@@ -8,6 +8,7 @@ import { useTaskDropTargetForColumn } from '@pages/boardModule/hooks/useTaskDrop
 import Button from '@shared/UIkit/Button/Button';
 import Card from '@shared/UIkit/Card/Card';
 
+import { getArrayOfFieldsFromList } from '@helpers/array.helper';
 import { filterTasksBySearchAndCompletion } from '@pages/boardModule/helpers/filterTasks.helper';
 import { getTasksByColumnId } from '@pages/boardModule/hooks/tasksByColumnId.helper';
 
@@ -16,6 +17,7 @@ import TaskCardVM from '../TaskCardVM/TaskCardVM';
 
 import { IBoardColumnVMProps } from './boardColumnVM.interface';
 import {
+  columnWrapperStyle,
   deleteButtonStyle,
   getCardStyle,
   headerStyle,
@@ -56,7 +58,7 @@ const BoardColumnVM: FC<IBoardColumnVMProps> = (props) => {
   );
 
   const taskIdsInColumn = useMemo(
-    () => tasksInColumn.map((task) => task.id),
+    () => getArrayOfFieldsFromList(tasksInColumn, 'id'),
     [tasksInColumn],
   );
 
@@ -97,10 +99,18 @@ const BoardColumnVM: FC<IBoardColumnVMProps> = (props) => {
     actions.removeColumn(column.id);
   };
 
+  const columnAriaLabel = t('common:board_column_aria', { title: column.title });
+  const deleteColumnAriaLabel = t('common:board_delete_column_aria', {
+    title: column.title,
+  });
+
   return (
     <div
       ref={columnRef}
       data-column-id={column.id}
+      style={columnWrapperStyle}
+      role="region"
+      aria-label={columnAriaLabel}
     >
       <Card style={cardStyle}>
         <div style={headerStyle}>
@@ -112,6 +122,7 @@ const BoardColumnVM: FC<IBoardColumnVMProps> = (props) => {
             onClick={handleDeleteColumn}
             variant="secondary"
             style={deleteButtonStyle}
+            ariaLabel={deleteColumnAriaLabel}
           >
             {t('common:delete')}
           </Button>

@@ -1,17 +1,23 @@
 import { CSSProperties } from 'react';
 
 export const rootStyle: CSSProperties = {
-  padding: 24,
+  padding: 'clamp(12px, 4vw, 24px)',
   display: 'flex',
   flexDirection: 'row',
-  gap: 16,
+  flexWrap: 'wrap',
+  gap: 20,
   alignItems: 'flex-start',
   minHeight: 400,
-  overflowX: 'auto',
+};
+
+export const addColumnWrapperStyle: CSSProperties = {
+  flex: '0 1 280px',
+  minWidth: 280,
 };
 
 export const emptyMessageStyle: CSSProperties = {
-  color: '#666',
-  fontSize: 14,
-  marginTop: 8,
+  color: 'var(--app-text-secondary, #86868b)',
+  fontSize: 15,
+  marginTop: 12,
+  paddingLeft: 4,
 };

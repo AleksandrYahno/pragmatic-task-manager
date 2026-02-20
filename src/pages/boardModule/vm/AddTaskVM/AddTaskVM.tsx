@@ -8,7 +8,12 @@ import Card from '@shared/UIkit/Card/Card';
 import Input from '@shared/UIkit/Input/Input';
 
 import { IAddTaskVMProps } from './addTaskVM.interface';
-import { addTaskWrapperStyle } from './addTaskVM.styles';
+import {
+  addTaskCardStyle,
+  addTaskInputStyle,
+  addTaskInputWrapperStyle,
+  addTaskWrapperStyle,
+} from './addTaskVM.styles';
 
 const AddTaskVM: FC<IAddTaskVMProps> = (props) => {
   const { columnId } = props;
@@ -44,15 +49,21 @@ const AddTaskVM: FC<IAddTaskVMProps> = (props) => {
       <Card
         variant="dashed"
         isFocused={isFocused}
+        style={addTaskCardStyle}
       >
-        <Input
-          value={title}
-          onChange={setTitle}
-          placeholder={t('common:board_task_title_placeholder')}
-          onKeyDown={handleKeyDown}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
+        <div style={addTaskInputWrapperStyle}>
+          <Input
+            value={title}
+            onChange={setTitle}
+            placeholder={t('common:board_task_title_placeholder')}
+            onKeyDown={handleKeyDown}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            style={addTaskInputStyle}
+            ariaLabel={t('common:board_add_task_input_aria')}
+            maxLength={500}
+          />
+        </div>
 
         <Button
           onClick={handleSubmit}

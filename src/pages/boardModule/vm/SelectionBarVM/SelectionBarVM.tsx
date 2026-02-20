@@ -1,16 +1,16 @@
-import { ChangeEvent, FC, useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useBoardActions } from '@providers/boardStoreProvider/hooks/useBoardActions';
 import useBoardStoreProvider from '@providers/boardStoreProvider/useBoardStoreProvider';
 import Button from '@shared/UIkit/Button/Button';
+import Select from '@shared/UIkit/Select/Select';
 
 import { getSortedColumnsAndIds } from '@pages/boardModule/helpers/boardColumns.helper';
 
 import {
   selectionBarCountStyle,
   selectionBarRootStyle,
-  selectionBarSelectStyle,
 } from './selectionBarVM.styles';
 
 const SelectionBarVM: FC = () => {
@@ -28,6 +28,11 @@ const SelectionBarVM: FC = () => {
   const { columns } = useMemo(
     () => getSortedColumnsAndIds(columnsFromStore),
     [columnsFromStore],
+  );
+
+  const columnOptions = useMemo(
+    () => columns.map((column) => ({ value: column.id, label: column.title })),
+    [columns],
   );
 
   const handleDelete = useCallback((): void => {
@@ -50,14 +55,12 @@ const SelectionBarVM: FC = () => {
   }, [selectedTaskIds, actions]);
 
   const handleMoveToColumn = useCallback(
-    (event: ChangeEvent<HTMLSelectElement>): void => {
-      const targetColumnId = event.target.value;
+    (targetColumnId: string): void => {
       if (!targetColumnId) return;
       selectedTaskIds.forEach((taskId) =>
         actions.moveTaskToColumn(taskId, targetColumnId),
       );
       actions.clearSelection();
-      event.target.value = '';
     },
     [selectedTaskIds, actions],
   );
@@ -67,11 +70,9 @@ const SelectionBarVM: FC = () => {
   }, [actions]);
 
   const handleSelectAllInColumn = useCallback(
-    (event: ChangeEvent<HTMLSelectElement>): void => {
-      const columnId = event.target.value;
+    (columnId: string): void => {
       if (!columnId) return;
       actions.selectAllInColumn(columnId);
-      event.target.value = '';
     },
     [actions],
   );
@@ -86,27 +87,13 @@ const SelectionBarVM: FC = () => {
         })}
       </span>
 
-      <select
-        style={selectionBarSelectStyle}
-        defaultValue=""
+      <Select
+        options={columnOptions}
+        value=""
         onChange={handleSelectAllInColumn}
-        aria-label={t('common:board_select_all_in_column')}
-      >
-        <option
-          value=""
-          disabled
-        >
-          {t('common:board_select_all_in_column')}
-        </option>
-        {columns.map((column) => (
-          <option
-            key={column.id}
-            value={column.id}
-          >
-            {column.title}
-          </option>
-        ))}
-      </select>
+        placeholderLabel={t('common:board_select_all_in_column')}
+        ariaLabel={t('common:board_select_all_in_column')}
+      />
 
       <Button
         variant="secondary"
@@ -132,28 +119,14 @@ const SelectionBarVM: FC = () => {
         {t('common:board_mark_incomplete')}
       </Button>
 
-      <select
-        style={selectionBarSelectStyle}
-        defaultValue=""
+      <Select
+        options={columnOptions}
+        value=""
         onChange={handleMoveToColumn}
-        aria-label={t('common:board_move_to_column')}
+        placeholderLabel={t('common:board_move_to_column')}
+        ariaLabel={t('common:board_move_to_column')}
         disabled={!hasSelection}
-      >
-        <option
-          value=""
-          disabled
-        >
-          {t('common:board_move_to_column')}
-        </option>
-        {columns.map((column) => (
-          <option
-            key={column.id}
-            value={column.id}
-          >
-            {column.title}
-          </option>
-        ))}
-      </select>
+      />
 
       <Button
         variant="secondary"

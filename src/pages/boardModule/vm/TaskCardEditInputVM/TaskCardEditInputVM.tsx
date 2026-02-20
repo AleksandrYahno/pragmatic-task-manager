@@ -37,6 +37,7 @@ const TaskCardEditInputVM: FC<ITaskCardEditInputVMProps> = (props) => {
       onKeyDown={handleKeyDown}
       onBlur={handleSubmit}
       style={taskCardEditInputVMInputStyle}
+      maxLength={500}
     />
   );
 };

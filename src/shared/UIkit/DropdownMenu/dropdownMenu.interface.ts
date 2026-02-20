@@ -10,4 +10,5 @@ export interface IDropdownMenuProps {
   trigger: ReactNode;
   items: IDropdownMenuItem[];
   disabled?: boolean;
+  ariaLabel?: string;
 }

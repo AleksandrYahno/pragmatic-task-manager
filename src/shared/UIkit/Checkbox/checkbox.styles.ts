@@ -3,16 +3,16 @@ import { CSSProperties } from 'react';
 export const checkboxWrapperStyle: CSSProperties = {
   display: 'inline-flex',
   alignItems: 'center',
-  gap: 8,
+  gap: 10,
   cursor: 'pointer',
 };
 
 export const checkboxInputStyle: CSSProperties = {
-  width: 18,
-  height: 18,
+  width: 20,
+  height: 20,
   margin: 0,
   cursor: 'inherit',
-  accentColor: '#0a66c2',
+  accentColor: 'var(--app-primary, #0071e3)',
 };
 
 export const getCheckboxWrapperStyle = (

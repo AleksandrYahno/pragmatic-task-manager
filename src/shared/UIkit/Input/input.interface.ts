@@ -8,4 +8,6 @@ export interface IInputProps {
   onFocus?: () => void;
   onBlur?: () => void;
   style?: CSSProperties;
+  ariaLabel?: string;
+  maxLength?: number;
 }
